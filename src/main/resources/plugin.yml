@@ -1,0 +1,6 @@
+name: SharkMC-Discord
+version: '1.0-SNAPSHOT'
+main: com.royumana.sharkMCDiscord.SharkMCDiscord
+api-version: '1.21'
+depend: [webDashboardPlugin]
+softdepend: [webDashboardPlugin]
