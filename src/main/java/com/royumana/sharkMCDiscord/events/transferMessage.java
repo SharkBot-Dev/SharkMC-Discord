@@ -1,15 +1,13 @@
 package com.royumana.sharkMCDiscord.events;
 
 import com.royumana.sharkMCDiscord.DatabaseManager;
+import com.royumana.sharkMCDiscord.plg_events.DiscordMessageEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-
-import java.sql.SQLException;
-import java.util.Objects;
 
 public class transferMessage extends ListenerAdapter {
     private final JavaPlugin plugin;
@@ -22,6 +20,16 @@ public class transferMessage extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+        // イベント発火
+        DiscordMessageEvent bukkitEvent = new DiscordMessageEvent(
+                event.getAuthor(),
+                event.getMessage()
+        );
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            Bukkit.getPluginManager().callEvent(bukkitEvent);
+        });
+
+        // Minecraftにメッセージ転送
         if (event.getAuthor().isBot()) return;
 
         String targetChannelId = null;
