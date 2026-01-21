@@ -1,6 +1,7 @@
 package com.royumana.sharkMCDiscord;
 
 import com.royumana.sharkMCDiscord.events.onChat;
+import com.royumana.sharkMCDiscord.events.onJoin;
 import com.royumana.sharkMCDiscord.events.transferMessage;
 import com.royumana.webDashboardPlugin.server.server;
 import net.dv8tion.jda.api.JDA;
@@ -43,6 +44,7 @@ public final class SharkMCDiscord extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new onChat(this, db), this);
+        getServer().getPluginManager().registerEvents(new onJoin(this, db), this);
     }
 
     public void startJDA(String savedToken) {
